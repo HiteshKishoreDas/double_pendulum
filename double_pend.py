@@ -11,6 +11,7 @@ from globals import *
 
 
 def f (u,t): # RHS of time-derivative equations
+
     th1 = u[0]     # Position of top rod
     th2 = u[1]     # Position of bottom rod
     w1 = u[2]  # Velocity of top rod
@@ -65,7 +66,7 @@ def RK4 (f,a,b,h,x0):
         k4 = h*f(x + k3, t + h)
         x += (k1 + 2*k2 + 2*k3 + k4)/6
         
-        print(f'Completion: {round(t*100/b,2)}%')
+        # print(f'Completion: {round(t*100/b,2)}%')
 
     return x_arr,t_arr
 
@@ -87,3 +88,17 @@ def double_pendulum (a, b, x0, N):
     x_arr = np.array(x_arr)
 
     return x_arr,t_arr
+
+
+def dist_to_end(th1,th2):
+
+    x1 = L1 * np.sin(th1)
+    y1 = -L1 * np.cos(th1)
+
+    x2 = x1 + L2 * np.sin(th2)
+    y2 = y1 - L2 * np.cos(th2)
+
+    # print(x1,y1)
+    # print(x2,y2)
+
+    return np.sqrt(x2*x2 + y2*y2)
